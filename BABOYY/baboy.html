@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffdeeb; /* Loopy Pink */
+            font-family: 'Arial Round', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #container {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+            border: 5px solid #ff99cc;
+            max-width: 80%;
+        }
+
+        h1 { color: #d63384; font-size: 2.5rem; }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            z-index: 1000;
+        }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+            position: relative;
+        }
+
+        #celebration {
+            display: none;
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Loopy Image Styling */
+        .loopy-img {
+            width: 250px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.5); }
+            100% { transform: scale(1); }
+        }
+
+        .melon-float {
+            position: absolute;
+            pointer-events: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <div id="main-content">
+            <img src="c:\Users\Janeth Gwapa\OneDrive\Pictures\HMGK6634.JPG" alt="Loopy" class="loopy-img">
+            <h1 id="question">Will you be my Valentine?</h1>
+            <div class="buttons">
+                <button id="yesBtn">YES</button>
+                <button id="noBtn">NO</button>
+            </div>
+        </div>
+
+        <div id="celebration">
+            <h1>HAPPY VALINTINE MY PRECIOUS BABYYY IM SOO HAPPY THAT WE BACK TOGETHER MYLOVE AND IM SORRY THAT YOUR BABOY CANT BUY YOU CHOCOLATE AND I CANT SPOILD MY MALDITA THIS VALINTIME 
+                AND MY BABY THANK YOU SOMUCH FOR TAKING CARE OF ME THE WAY YOU SCOLD ME AWWW MY BABY AND THANK YOU SOMCYH FOR UNDERSTANDING AND ACCEPT ME FOR WHAT I AM MYLOVE AND YEA MY ONLY MOMMY MY ONLY BABOY
+                MY ONLY MALDITA MY ONLY PRECIOUS BABY MY LOPPY MY EVEYTHING I LOVE YOU SOMUCH  🍉❤️</h1>
+            <img src="https://media.tenor.com/C7f2e1_nO30AAAAM/loopy-zandalee.gif" alt="Happy Loopy" class="loopy-img">
+            <div style="font-size: 20px;">your husband</div>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const mainContent = document.getElementById('main-content');
+        const celebration = document.getElementById('celebration');
+        
+        let yesSize = 20;
+
+        noBtn.addEventListener('mouseover', moveNoButton); // Moves when she tries to hover
+        noBtn.addEventListener('click', moveNoButton);
+
+        function moveNoButton() {
+            // Make YES bigger
+            yesSize += 40; 
+            yesBtn.style.fontSize = yesSize + 'px';
+            yesBtn.style.padding = (yesSize / 2) + 'px ' + yesSize + 'px';
+            
+            // Move NO button away
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        yesBtn.addEventListener('click', () => {
+            mainContent.style.display = 'none';
+            celebration.style.display = 'block';
+            document.body.style.backgroundColor = '#d1ffbd'; // Watermelon Green
+            spawnMelons();
+        });
+
+        function spawnMelons() {
+            for(let i=0; i<40; i++) {
+                const melon = document.createElement('div');
+                melon.className = 'melon-float';
+                melon.innerText = Math.random() > 0.5 ? '🍉': '🌸';
+                melon.style.left = Math.random() * 100 + 'vw';
+                melon.style.top = Math.random() * 100 + 'vh';
+                melon.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                document.body.appendChild(melon);
+                
+                // Simple float animation
+                let speed = Math.random() * 2 + 1;
+                let pos = 0;
+                setInterval(() => {
+                    pos += speed;
+                    melon.style.transform = `translateY(-${pos}px) rotate(${pos}deg)`;
+                    if(pos > window.innerHeight + 100) pos = -100;
+                }, 20);
+            }
+        }
+    </script>
+</body>
+</html>
